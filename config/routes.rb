@@ -1,7 +1,12 @@
 NflDraft::Application.routes.draw do
+  resources :ownerships
+
   resources :orders
+
   resources :teams
+
   resources :players
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
