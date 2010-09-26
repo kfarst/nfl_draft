@@ -6,7 +6,10 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Mayor.create(:name => 'Daley', :city => cities.first)
 require 'fastercsv'
-require 'ruby-debug'
+
+Player.destroy_all
+Team.destroy_all
+Order.destroy_all
 
 directory = File.dirname(__FILE__)
 
@@ -14,9 +17,9 @@ players = "/seed_data/players.csv"
 puts "Loading player data..."
 
 ActiveRecord::Base.transaction do
-  FasterCSV.foreach(directory + players, :col_sep => ",", :row_sep => "\n", :headers => :first_row) do |row|
+  FasterCSV.foreach(directory + players, :row_sep => "\n", :headers => :first_row) do |row|
     name, position = row
-    Player.create(:name => row[0], :position => row[1])
+    Player.create(:name => row["Player Name"], :position => row["Position"])
   end
 end
 puts "Done"
@@ -25,9 +28,9 @@ teams = "/seed_data/teams.csv"
 puts "Loading team data..."
 
 ActiveRecord::Base.transaction do
-  FasterCSV.foreach(directory + teams, :col_sep => ",", :row_sep => "\n", :headers => :first_row) do |row|
+  FasterCSV.foreach(directory + teams, :row_sep => "\n", :headers => :first_row) do |row|
     name, division = row
-    Team.create(:name => row[0], :position => row[1])
+    Team.create(:name => row["Name"], :division => row["Division"])
   end
 end
 puts "Done"
@@ -35,9 +38,9 @@ puts "Done"
 order = "/seed_data/order.csv"
 puts "Loading draft order data..."
 ActiveRecord::Base.transaction do
-  FasterCSV.foreach(directory + order, :col_sep => ",", :row_sep => "\n", :headers => :first_row) do |row|
+  FasterCSV.foreach(directory + order, :row_sep => "\n", :headers => :first_row) do |row|
     round, pick, team = row
-    Order.create(:round => row[0], :pick => row[1], :team => row[2])
+    Order.create(:round => row["Round"], :pick => row["Pick"], :team => row["Team Name"])
   end
 end
 puts "Done"
