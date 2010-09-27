@@ -1,4 +1,7 @@
 NflDraft::Application.routes.draw do
+  match "/undrafted_players" => "players#undrafted_players", :as => :undrafted_players
+  match "/draft_player" => "teams#draft_player", :as => :draft_player
+
   resources :ownerships
 
   resources :orders

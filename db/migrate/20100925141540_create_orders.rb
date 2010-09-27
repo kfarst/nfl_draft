@@ -4,6 +4,7 @@ class CreateOrders < ActiveRecord::Migration
       t.integer :round
       t.integer :pick
       t.string :team
+      t.boolean :chosen, :default => false
 
       t.timestamps
     end

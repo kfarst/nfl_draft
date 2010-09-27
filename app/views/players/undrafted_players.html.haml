@@ -1,0 +1,8 @@
+= form_tag draft_player_path, :method => :post do
+  = hidden_field_tag :order_id, order.id
+  - @players.in_groups_of(5, false) do |player_row|
+    - player_row.each do |player|
+      = radio_button_tag :player, player.id
+      = label_tag player.name
+    %br
+  = submit_tag "Draft"

@@ -16,6 +16,7 @@ ActiveRecord::Schema.define(:version => 20100925150638) do
     t.integer  "round"
     t.integer  "pick"
     t.string   "team"
+    t.boolean  "chosen",     :default => false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

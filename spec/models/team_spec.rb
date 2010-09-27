@@ -17,7 +17,7 @@ describe Team do
 
   describe ".acquire" do
     let(:team) { Factory(:team) }
-    let(:player) { Factory(:player) }
+    let(:order) { Factory(:order) }
 
     before(:each) { team.aquire(player) }
 

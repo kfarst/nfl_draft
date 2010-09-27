@@ -16,31 +16,29 @@ directory = File.dirname(__FILE__)
 players = "/seed_data/players.csv"
 puts "Loading player data..."
 
-ActiveRecord::Base.transaction do
-  FasterCSV.foreach(directory + players, :row_sep => "\n", :headers => :first_row) do |row|
-    name, position = row
-    Player.create(:name => row["Player Name"], :position => row["Position"])
-  end
+FasterCSV.foreach(directory + players, :row_sep => "\n", :headers => :first_row) do |row|
+  name, position = row
+  Player.create!(:name => row["Player Name"], :position => row["Position"])
 end
+
 puts "Done"
 
 teams = "/seed_data/teams.csv"
 puts "Loading team data..."
 
-ActiveRecord::Base.transaction do
-  FasterCSV.foreach(directory + teams, :row_sep => "\n", :headers => :first_row) do |row|
-    name, division = row
-    Team.create(:name => row["Name"], :division => row["Division"])
-  end
+FasterCSV.foreach(directory + teams, :row_sep => "\n", :headers => :first_row) do |row|
+  name, division = row
+  Team.create!(:name => row["Team Name"], :division => row["Division"])
 end
+
 puts "Done"
 
 order = "/seed_data/order.csv"
 puts "Loading draft order data..."
-ActiveRecord::Base.transaction do
-  FasterCSV.foreach(directory + order, :row_sep => "\n", :headers => :first_row) do |row|
-    round, pick, team = row
-    Order.create(:round => row["Round"], :pick => row["Pick"], :team => row["Team Name"])
-  end
+
+FasterCSV.foreach(directory + order, :row_sep => "\n", :headers => :first_row) do |row|
+  round, pick, team = row
+  Order.create!(:round => row["Round"], :pick => row["Pick"], :team => row["Team Name"])
 end
+
 puts "Done"
