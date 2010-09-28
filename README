@@ -4,6 +4,6 @@ Draft Tracker
 
 Loading Default Data
 
-Loading default player, team, and draft data can be accomplised with:
+Loading default player, team, and draft data can be accomplished with:
 
 rake db:seeds
